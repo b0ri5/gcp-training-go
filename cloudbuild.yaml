@@ -40,3 +40,7 @@ steps:
 substitutions:
   _REGION: 'us-west1'
   _ARTIFACT_REGISTRY_REPO: 'cheese-repo'
+
+options:
+  logging: 'CLOUD_LOGGING_ONLY'
+  serviceAccount: 'projects/gtener-cdks2/serviceAccounts/65958498363-compute@developer.gserviceaccount.com'
