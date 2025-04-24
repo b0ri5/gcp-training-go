@@ -29,7 +29,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'gcp-training-go-service' # You might want to parameterize this
+      - 'gcp-training-go-service'
       - '--image'
       - '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go:${SHORT_SHA}'
       - '--region'
