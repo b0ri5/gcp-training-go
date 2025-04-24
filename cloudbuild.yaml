@@ -17,11 +17,11 @@ steps:
 
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go', '.']
+    args: ['build', '-t', 'us-west1-docker.pkg.dev/gtener-cdks2/cheese-repo/gcp-training-go', '.']
 
   # Push the Docker image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go']
+    args: ['push', 'us-west1-docker.pkg.dev/gtener-cdks2/cheese-repo/gcp-training-go']
 
   # Deploy to Cloud Run
   - name: 'gcr.io/google-cloud-sdk'
@@ -31,15 +31,10 @@ steps:
       - 'deploy'
       - 'gcp-training-go-service'
       - '--image'
-      - '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go:latest'
+      - 'us-west1-docker.pkg.dev/gtener-cdks2/cheese-repo/gcp-training-go:latest'
       - '--region'
-      - '${REGION}'
+      - 'us-west1'
       - '--allow-unauthenticated'
-
-# Define substitution variables for dynamic configuration
-substitutions:
-  REGION: 'us-west1'
-  ARTIFACT_REGISTRY_REPO: 'cheese-repo'
 
 options:
   logging: 'CLOUD_LOGGING_ONLY'
