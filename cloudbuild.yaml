@@ -38,8 +38,8 @@ steps:
 
 # Define substitution variables for dynamic configuration
 substitutions:
-  _REGION: 'us-west1'
-  _ARTIFACT_REGISTRY_REPO: 'cheese-repo'
+  REGION: 'us-west1'
+  ARTIFACT_REGISTRY_REPO: 'cheese-repo'
 
 options:
   logging: 'CLOUD_LOGGING_ONLY'
