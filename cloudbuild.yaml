@@ -43,4 +43,5 @@ substitutions:
 
 options:
   logging: 'CLOUD_LOGGING_ONLY'
-  serviceAccount: 'projects/gtener-cdks2/serviceAccounts/65958498363-compute@developer.gserviceaccount.com'
+  
+serviceAccount: 'projects/gtener-cdks2/serviceAccounts/65958498363-compute@developer.gserviceaccount.com'
