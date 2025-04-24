@@ -1,0 +1,42 @@
+steps:
+  # Lint
+  - name: 'golangci/golangci-lint:latest'
+    volumes:
+      - name: 'go'
+        path: '/go'
+    env: ['GOPATH=/go']
+    args: ['run']
+
+  # Run unit tests
+  - name: 'golang:1.24'
+    volumes:
+      - name: 'go'
+        path: '/go'
+    env: ['GOPATH=/go']
+    args: ['go', 'test', './...']
+
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go', '.']
+
+  # Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go']
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google-cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'gcp-training-go-service' # You might want to parameterize this
+      - '--image'
+      - '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go:${SHORT_SHA}'
+      - '--region'
+      - '${REGION}'
+      - '--allow-unauthenticated'
+
+# Define substitution variables for dynamic configuration
+substitutions:
+  _REGION: 'us-west1'
+  _ARTIFACT_REGISTRY_REPO: 'cheese-repo'
