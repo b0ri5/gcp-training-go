@@ -31,7 +31,7 @@ steps:
       - 'deploy'
       - 'gcp-training-go-service'
       - '--image'
-      - '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go:${SHORT_SHA}'
+      - '${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY_REPO}/gcp-training-go:latest'
       - '--region'
       - '${REGION}'
       - '--allow-unauthenticated'
